@@ -1,6 +1,9 @@
+"""Flask Application for Paws Rescue Center."""
 from flask import Flask, abort, render_template
+from forms import SignUpForm
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "dfewfew123213rwdsgert34tgfd1234trgf"
 
 """Information regarding the Pets in the System."""
 pets = [
@@ -15,23 +18,43 @@ pets = [
     {"id": 4, "name": "Mr. Furrkins", "age": "5 years", "bio": "Probably napping."},
 ]
 
+"""Information regarding the Users in the System."""
+users = [
+            {"id": 1, "full_name": "Pet Rescue Team", "email": "team@pawsrescue.co", "password": "adminpass"},
+        ]
+
+
 
 @app.route("/")
 def homepage():
+    """View function for Home Page."""
     return render_template("home.html", pets=pets)
 
 
 @app.route("/about")
 def about():
+    """View function for About Page."""
     return render_template("about.html")
 
 
 @app.route("/details/<int:pet_id>")
 def pet_details(pet_id):
-    pet = next ((pet for pet in pets if pet["id"] == pet_id), None)
+    """View function for Showing Details of Each Pet."""
+    pet = next((pet for pet in pets if pet["id"] == pet_id), None)
     if pet is None:
-        abort(404, description="No pets found with that id")
+        abort(404, description="No Pet was Found with the given ID")
     return render_template("details.html", pet=pet)
+
+
+@app.route("/signup", methods=["POST", "GET"])
+def signup():
+    """View function for Showing Details of Each Pet."""
+    form = SignUpForm()
+    if form.validate_on_submit():
+        new_user = {"id": len(users)+1, "full_name": form.full_name.data, "email": form.email.data, "password": form.password.data}
+        users.append(new_user)
+        return render_template("signup.html", message = "Successfully signed up")
+    return render_template("signup.html", form=form)
 
 
 if __name__ == "__main__":
