@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Home - Paws Rescue</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-    <script src="script.js"></script>
-  </head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+Home - Paws Rescue
+{% endblock %}
+{% block head %}
   <h1 id = "title"><center>Paws Rescue Center 🐾</center></h1>
+{% endblock %}
+{% block content %}
   <table>
     <tr>
       <th>Image</th>
@@ -15,30 +14,15 @@
       <th>Age</th>
       <th>Bio</th>
     </tr>
+	{% for pet in pets %}
     <tr>
-				<td><img height="100" src="{{url_for('static', filename='1.jpg')}}" ></td>
-      <td>Nelly</td>
-      <td>5 weeks</td>
-      <td>I am a tiny kitten rescued by the good people at Paws Rescue Center. I love squeaky toys and cuddles.</td>
+	<td><img height="100" src="{{url_for('static', filename=pet['id']|string+ ".jpg")}}" ></td>
+		<td>{{pet['name']}}</td>
+		<td>{{pet['age']}}</td>
+	<td>{{pet['bio']}}</td>
     </tr>
-    <tr>
-      <td><img height="100" src="{{url_for('static', filename='2.jpg')}}" ></td>
-      <td>Yuki</td>
-      <td>8 months</td>
-      <td>I am a handsome gentle-cat. I like to dressup in bow ties.</td>
-    </tr>
-    <tr>
-      <td><img height="100" src="{{url_for('static', filename='3.jpg')}}" ></td>
-      <td>Basker</td>
-      <td>1 year</td>
-      <td>I love barking. But, I love my friends more.</td>
-    </tr>
-    <tr>
-      <td><img height="100" src="{{url_for('static', filename='4.jpg')}}" ></td>
-      <td>Mr. Furrkins</td>
-      <td>5 years</td>
-      <td>Probably napping.</td>
-    </tr>
+	{% endfor %}
   </table>
+{% endblock %}
 </body>
 </html>
