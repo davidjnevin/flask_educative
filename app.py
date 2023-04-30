@@ -3,6 +3,18 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route("/")
+def index():
+    Username = "Sally"
+    return render_template("index.html", username = Username)
+
+
+@app.route("/dict")
+def index_dict():
+    Users = { "Betty":"San Franscisco" }
+    return render_template("index_dict.html", users = Users)
+
+
+@app.route("/home")
 def home():
     return render_template("home.html")
 
