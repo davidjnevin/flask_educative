@@ -3,13 +3,15 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-    return "Hello, World!"
+def homepage():
+    return "Paws Rescue Center 🐾"
 
 
-@app.route("/flask")
-def flask():
-    return "Hello, flask!"
+@app.route("/about")
+def about():
+    return """
+    We are a non-profit organization working as an animal rescue. We aim to help you connect with the purrfect furbaby for you! The animals you find on our website are rescued and rehabilitated animals. Our mission is to promote the ideology "adopt, don't shop"!
+    """
 
 @app.route("/<myname>")
 def greetings(myname):
