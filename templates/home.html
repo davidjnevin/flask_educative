@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home - Paws Rescue
+Home
 {% endblock %}
-{% block head %}
-  <h1 id = "title"><center>Paws Rescue Center 🐾</center></h1>
+{% block header %}
+  Paws Rescue Center🐾
 {% endblock %}
 {% block content %}
   <table>
@@ -16,13 +16,15 @@ Home - Paws Rescue
     </tr>
 	{% for pet in pets %}
     <tr>
-	<td><img height="100" src="{{url_for('static', filename=pet['id']|string+ ".jpg")}}" ></td>
-		<td>{{pet['name']}}</td>
-		<td>{{pet['age']}}</td>
+	<td>
+			<a href="details/{{pet['id']}}">
+		<img height="100" src="{{url_for('static', filename=pet['id']|string+ ".jpg")}}">
+	</a>
+	</td>
+	<td>{{pet['name']}}</td>
+	<td>{{pet['age']}}</td>
 	<td>{{pet['bio']}}</td>
     </tr>
 	{% endfor %}
   </table>
 {% endblock %}
-</body>
-</html>

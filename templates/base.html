@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+    <title>{% block title %} {% endblock %} - Paws Rescue Center</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
-
-  <title>{% block title %}<!-- Placeholder for Title -->{% endblock %} - Jinja Demo</title>
-
-    {% block head %}
-    <!-- Placeholder for Other Imports -->
-    {% endblock %}
-
 </head>
 <body>
-    <div id="content">
+<h1 id="title"><center>{% block header %} {% endblock %}</center></h1>
+    <div id='content'>
         {% block content %}
         <!-- Placeholder for Page Content -->
         {% endblock %}
     </div>
-    <div id="footer"> Copyright © 2023 All Rights Reserved </div>
 </body>
 </html>
