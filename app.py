@@ -1,9 +1,29 @@
 """Flask Application for Paws Rescue Center."""
+from enum import unique
 from flask import Flask, abort, redirect, render_template, session, url_for
 from forms import LoginForm, SignUpForm
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "dfewfew123213rwdsgert34tgfd1234trgf"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///paws.db"
+db = SQLAlchemy(app)
+
+"""Model for Pets"""
+class Pet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    age = db.Column(db.String)
+    bio = db.Column(db.String)
+
+"""Model for Users"""
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
+
+db.create_all()
 
 """Information regarding the Pets in the System."""
 pets = [
