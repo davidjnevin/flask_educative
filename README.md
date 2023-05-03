@@ -13,3 +13,4 @@ Topics Covered
 - Creating Models using Flask-SQLAlchemy
 - Operations on Models using SQLAlchemy ORM
 
+See PawsRescue branch for working app.
